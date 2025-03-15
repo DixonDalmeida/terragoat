@@ -19,7 +19,7 @@ resource "google_container_cluster" "workload_cluster" {
   network                  = google_compute_network.vpc.name
   subnetwork               = google_compute_subnetwork.public-subnetwork.name
   ip_allocation_policy {
-    cluster_secondary_range_name  = "gke-terragoat-dev-cluster-services-neyesw"
+    cluster_secondary_range_name  = "gke-terragoat-dev-cluster-services-new"
     services_secondary_range_name = "tf-test-secondary-range-update1"
   }
   master_authorized_networks_config {
