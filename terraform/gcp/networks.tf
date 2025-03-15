@@ -14,6 +14,11 @@ resource "google_compute_subnetwork" "public-subnetwork" {
     range_name    = "tf-test-secondary-range-update1"
     ip_cidr_range = "192.168.10.0/24"
   }
+   # New secondary range for GKE Services
+  secondary_ip_range {
+    range_name    = "gke-terragoat-dev-cluster-services-new"
+    ip_cidr_range = "10.46.0.0/20"  # Adjust based on available IPs
+  }
 }
 
 resource "google_compute_firewall" "allow_all" {

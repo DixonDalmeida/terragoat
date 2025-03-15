@@ -18,6 +18,10 @@ resource "google_container_cluster" "workload_cluster" {
   deletion_protection = false
   network                  = google_compute_network.vpc.name
   subnetwork               = google_compute_subnetwork.public-subnetwork.name
+  ip_allocation_policy {
+    cluster_secondary_range_name  = "gke-terragoat-dev-cluster-services-neyesw"
+    services_secondary_range_name = "tf-test-secondary-range-update1"
+  }
   master_authorized_networks_config {
     cidr_blocks {
       cidr_block = "0.0.0.0/0"
@@ -28,8 +32,10 @@ resource "google_container_cluster" "workload_cluster" {
     disk_size_gb = 10           # Reduce disk size (Default is usually 100GB)
   }
   lifecycle {
-    ignore_changes = [initial_node_count]
+    ignore_changes = [initial_node_count,node_config ]
   }
+    networking_mode = "VPC_NATIVE"
+
 }
 
 # resource "google_container_node_pool" "custom_node_pool" {
